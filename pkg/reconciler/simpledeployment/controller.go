@@ -18,6 +18,7 @@ package simpledeployment
 
 import (
 	"context"
+	"time"
 
 	"knative.dev/pkg/configmap"
 	"knative.dev/pkg/controller"
@@ -25,8 +26,8 @@ import (
 
 	kubeclient "knative.dev/pkg/client/injection/kube/client"
 	podinformer "knative.dev/pkg/client/injection/kube/informers/core/v1/pod"
-	simpledeploymentinformer "knative.dev/sample-controller/pkg/client/injection/informers/samples/v1alpha1/simpledeployment"
-	simpledeploymentreconciler "knative.dev/sample-controller/pkg/client/injection/reconciler/samples/v1alpha1/simpledeployment"
+	simpledeploymentinformer "knative.dev/super-controller/pkg/client/injection/informers/samples/v1alpha1/simpledeployment"
+	simpledeploymentreconciler "knative.dev/super-controller/pkg/client/injection/reconciler/samples/v1alpha1/simpledeployment"
 )
 
 // NewController creates a Reconciler and returns the result of NewImpl.
@@ -54,7 +55,7 @@ func NewController(
 	logger.Info("Setting up event handlers.")
 
 	// Listen for events on the main resource and enqueue themselves.
-	simpledeploymentInformer.Informer().AddEventHandler(controller.HandleAll(impl.Enqueue))
+	simpledeploymentInformer.Informer().AddEventHandlerWithResyncPeriod(controller.HandleAll(impl.Enqueue),10*time.Second)
 
 	// Listen for events on the child resources and enqueue the owner of them.
 	podInformer.Informer().AddEventHandler(controller.HandleAll(impl.EnqueueControllerOf))

@@ -37,9 +37,9 @@ import (
 	kmp "knative.dev/pkg/kmp"
 	logging "knative.dev/pkg/logging"
 	reconciler "knative.dev/pkg/reconciler"
-	v1alpha1 "knative.dev/sample-controller/pkg/apis/samples/v1alpha1"
-	versioned "knative.dev/sample-controller/pkg/client/clientset/versioned"
-	samplesv1alpha1 "knative.dev/sample-controller/pkg/client/listers/samples/v1alpha1"
+	v1alpha1 "knative.dev/super-controller/pkg/apis/samples/v1alpha1"
+	versioned "knative.dev/super-controller/pkg/client/clientset/versioned"
+	samplesv1alpha1 "knative.dev/super-controller/pkg/client/listers/samples/v1alpha1"
 )
 
 // Interface defines the strongly typed interfaces to be implemented by a

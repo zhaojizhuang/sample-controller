@@ -24,13 +24,15 @@ import (
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	serializer "k8s.io/apimachinery/pkg/runtime/serializer"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
-	samplesv1alpha1 "knative.dev/sample-controller/pkg/apis/samples/v1alpha1"
+	functionv1beta1 "knative.dev/super-controller/pkg/apis/function/v1beta1"
+	samplesv1alpha1 "knative.dev/super-controller/pkg/apis/samples/v1alpha1"
 )
 
 var Scheme = runtime.NewScheme()
 var Codecs = serializer.NewCodecFactory(Scheme)
 var ParameterCodec = runtime.NewParameterCodec(Scheme)
 var localSchemeBuilder = runtime.SchemeBuilder{
+	functionv1beta1.AddToScheme,
 	samplesv1alpha1.AddToScheme,
 }
 

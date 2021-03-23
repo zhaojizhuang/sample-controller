@@ -37,9 +37,9 @@ import (
 	logging "knative.dev/pkg/logging"
 	logkey "knative.dev/pkg/logging/logkey"
 	reconciler "knative.dev/pkg/reconciler"
-	versionedscheme "knative.dev/sample-controller/pkg/client/clientset/versioned/scheme"
-	client "knative.dev/sample-controller/pkg/client/injection/client"
-	simpledeployment "knative.dev/sample-controller/pkg/client/injection/informers/samples/v1alpha1/simpledeployment"
+	versionedscheme "knative.dev/super-controller/pkg/client/clientset/versioned/scheme"
+	client "knative.dev/super-controller/pkg/client/injection/client"
+	simpledeployment "knative.dev/super-controller/pkg/client/injection/informers/samples/v1alpha1/simpledeployment"
 )
 
 const (

@@ -24,9 +24,11 @@ import (
 	"k8s.io/client-go/discovery"
 	fakediscovery "k8s.io/client-go/discovery/fake"
 	"k8s.io/client-go/testing"
-	clientset "knative.dev/sample-controller/pkg/client/clientset/versioned"
-	samplesv1alpha1 "knative.dev/sample-controller/pkg/client/clientset/versioned/typed/samples/v1alpha1"
-	fakesamplesv1alpha1 "knative.dev/sample-controller/pkg/client/clientset/versioned/typed/samples/v1alpha1/fake"
+	clientset "knative.dev/super-controller/pkg/client/clientset/versioned"
+	functionv1beta1 "knative.dev/super-controller/pkg/client/clientset/versioned/typed/function/v1beta1"
+	fakefunctionv1beta1 "knative.dev/super-controller/pkg/client/clientset/versioned/typed/function/v1beta1/fake"
+	samplesv1alpha1 "knative.dev/super-controller/pkg/client/clientset/versioned/typed/samples/v1alpha1"
+	fakesamplesv1alpha1 "knative.dev/super-controller/pkg/client/clientset/versioned/typed/samples/v1alpha1/fake"
 )
 
 // NewSimpleClientset returns a clientset that will respond with the provided objects.
@@ -75,6 +77,11 @@ func (c *Clientset) Tracker() testing.ObjectTracker {
 }
 
 var _ clientset.Interface = &Clientset{}
+
+// FunctionV1beta1 retrieves the FunctionV1beta1Client
+func (c *Clientset) FunctionV1beta1() functionv1beta1.FunctionV1beta1Interface {
+	return &fakefunctionv1beta1.FakeFunctionV1beta1{Fake: &c.Fake}
+}
 
 // SamplesV1alpha1 retrieves the SamplesV1alpha1Client
 func (c *Clientset) SamplesV1alpha1() samplesv1alpha1.SamplesV1alpha1Interface {

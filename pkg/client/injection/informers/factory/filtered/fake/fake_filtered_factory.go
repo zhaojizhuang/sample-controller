@@ -25,9 +25,9 @@ import (
 	controller "knative.dev/pkg/controller"
 	injection "knative.dev/pkg/injection"
 	logging "knative.dev/pkg/logging"
-	externalversions "knative.dev/sample-controller/pkg/client/informers/externalversions"
-	fake "knative.dev/sample-controller/pkg/client/injection/client/fake"
-	filtered "knative.dev/sample-controller/pkg/client/injection/informers/factory/filtered"
+	externalversions "knative.dev/super-controller/pkg/client/informers/externalversions"
+	fake "knative.dev/super-controller/pkg/client/injection/client/fake"
+	filtered "knative.dev/super-controller/pkg/client/injection/informers/factory/filtered"
 )
 
 var Get = filtered.Get

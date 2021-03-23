@@ -22,15 +22,18 @@ import (
 	"knative.dev/hack/schema/commands"
 	"knative.dev/hack/schema/registry"
 
-	v1alpha1 "knative.dev/sample-controller/pkg/apis/samples/v1alpha1"
+	"knative.dev/super-controller/pkg/apis/function/v1beta1"
+//	v1alpha1 "knative.dev/super-controller/pkg/apis/samples/v1alpha1"
 )
 
 // schema is a tool to dump the schema for Eventing resources.
 func main() {
-	registry.Register(&v1alpha1.AddressableService{})
-	registry.Register(&v1alpha1.SimpleDeployment{})
+	registry.Register(&v1beta1.Function{})
+	//registry.Register(&v1alpha1.AddressableService{})
+	//registry.Register(&v1alpha1.SimpleDeployment{})
 
-	if err := commands.New("knative.dev/sample-controller").Execute(); err != nil {
+
+	if err := commands.New("knative.dev/super-controller").Execute(); err != nil {
 		log.Fatal("Error during command execution: ", err)
 	}
 }
