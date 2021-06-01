@@ -204,7 +204,7 @@ const (
 // NewImpl returns a {{.controllerImpl|raw}} that handles queuing and feeding work from
 // the queue through an implementation of {{.controllerReconciler|raw}}, delegating to
 // the provided Interface and optional Finalizer methods. OptionsFn is used to return
-// {{.controllerOptions|raw}} to be used but the internal reconciler.
+// {{.controllerOptions|raw}} to be used by the internal reconciler.
 func NewImpl(ctx {{.contextContext|raw}}, r Interface{{if .hasClass}}, classValue string{{end}}, optionsFns ...{{.controllerOptionsFn|raw}}) *{{.controllerImpl|raw}} {
 	logger := {{.loggingFromContext|raw}}(ctx)
 
@@ -253,6 +253,7 @@ func NewImpl(ctx {{.contextContext|raw}}, r Interface{{if .hasClass}}, classValu
 
 	impl := {{.controllerNewImpl|raw}}(rec, logger, ctrTypeName)
 	agentName := defaultControllerAgentName
+	impl.Concurrency = controller.DefaultThreadsPerController
 
 	// Pass impl to the options. Save any optional results.
 	for _, fn := range optionsFns {
@@ -273,6 +274,9 @@ func NewImpl(ctx {{.contextContext|raw}}, r Interface{{if .hasClass}}, classValu
 		{{- end}}
 		if opts.DemoteFunc != nil {
 			rec.DemoteFunc = opts.DemoteFunc
+		}
+		if opts.Concurrency != 0 {
+			impl.Concurrency = opts.Concurrency
 		}
 	}
 
